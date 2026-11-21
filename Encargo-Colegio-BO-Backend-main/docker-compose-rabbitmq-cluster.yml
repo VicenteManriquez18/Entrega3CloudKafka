@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  rabbit1:
+    image: rabbitmq:3.13-management
+    hostname: rabbit1
+    container_name: rabbit1
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "PEDIDOS360_SECRET_COOKIE"
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-pedidos}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-pedidos123}
+    networks:
+      - pedidos360-net
+
+  rabbit2:
+    image: rabbitmq:3.13-management
+    hostname: rabbit2
+    container_name: rabbit2
+    depends_on:
+      - rabbit1
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "PEDIDOS360_SECRET_COOKIE"
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER:-pedidos}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASS:-pedidos123}
+    command: >
+      bash -c "rabbitmq-server -detached &&
+               sleep 10 &&
+               rabbitmqctl stop_app &&
+               rabbitmqctl reset &&
+               rabbitmqctl join_cluster rabbit@rabbit1 &&
+               rabbitmqctl start_app &&
+               tail -f /dev/null"
+    networks:
+      - pedidos360-net
+
+networks:
+  pedidos360-net:
+    name: pedidos360-net
+    driver: bridge
+

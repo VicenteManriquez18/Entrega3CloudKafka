@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte de Pruebas de Seguridad - Colegio BO</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light p-4">
+    <div class="container bg-white shadow-sm rounded p-4">
+        <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-4">
+            <div>
+                <h1 class="h3 text-primary mb-1">🛡️ Reporte de Pruebas de Seguridad (DevSecOps)</h1>
+                <p class="text-muted mb-0">Colegio BO - Plataforma de Gestión Escolar | Validación Integral (35%)</p>
+            </div>
+            <div class="text-end">
+                <span class="badge bg-success fs-5 p-2">Cumplimiento: 100.0%</span>
+                <div class="text-muted small mt-1">2026-11-10 16:10:58</div>
+            </div>
+        </div>
+
+        <div class="row g-3 mb-4 text-center">
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h6 class="text-muted">Total Pruebas</h6>
+                        <h2 class="text-primary">8</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success">
+                    <div class="card-body">
+                        <h6 class="text-muted">Aprobadas</h6>
+                        <h2 class="text-success">8</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-danger">
+                    <div class="card-body">
+                        <h6 class="text-muted">Fallidas</h6>
+                        <h2 class="text-danger">0</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info">
+                    <div class="card-body">
+                        <h6 class="text-muted">Mitigaciones</h6>
+                        <h2 class="text-info">5 Activas</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h4 class="mb-3">Matriz de Resultados OWASP Top 10</h4>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Caso de Prueba</th>
+                        <th>Categoría OWASP</th>
+                        <th>Estado</th>
+                        <th>Detalle / Mitigación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        <tr>
+            <td><strong>SEC-01</strong></td>
+            <td>Verificación de Cabeceras HTTP Defensivas</td>
+            <td><span class="badge bg-secondary">OWASP A05 - Security Misconfiguration</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Todas las cabeceras requeridas están presentes: X-Frame-Options: DENY, X-Content-Type-Options: nosniff, X-XSS-Protection: 1; mode=block...</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-02a</strong></td>
+            <td>Rechazo Estricto de Contraseñas Débiles</td>
+            <td><span class="badge bg-secondary">OWASP A07 - Authentication Failures</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Se verificaron 5 variantes de contraseñas inseguras; todas fueron rechazadas con HTTP 400.</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-02b</strong></td>
+            <td>Aceptación de Contraseña Segura y Compleja</td>
+            <td><span class="badge bg-secondary">OWASP A07 - Authentication Failures</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Contraseña que cumple la norma (Mayús + Minús + Núm + Especial >= 8 caracteres) registrada con éxito.</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-03</strong></td>
+            <td>Resistencia ante Inyección SQL en Autenticación</td>
+            <td><span class="badge bg-secondary">OWASP A03 - Injection</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Todos los payloads de inyección SQL fueron neutralizados por ORM parametrizado (Spring Data JPA).</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-04</strong></td>
+            <td>Sanitización de Inyecciones XSS en Inputs</td>
+            <td><span class="badge bg-secondary">OWASP A03 - Injection / XSS</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Las entradas con tags HTML/Javascript fueron sanitizadas y no se reflejaron scripts maliciosos.</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-05a</strong></td>
+            <td>Prevención de Escalación de Privilegios en Rol</td>
+            <td><span class="badge bg-secondary">OWASP A01 - Broken Access Control</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>El servidor rechazó la inyección de roles arbitrarios no autorizados mediante lista blanca.</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-05b</strong></td>
+            <td>Protección de Recursos Protegidos sin Token</td>
+            <td><span class="badge bg-secondary">OWASP A01 - Broken Access Control</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>Control de acceso verificado: el sistema exige autenticación o token para operaciones sensibles.</td>
+        </tr>
+        
+        <tr>
+            <td><strong>SEC-06</strong></td>
+            <td>Enmascaramiento de Trazas Internas (CWE-209)</td>
+            <td><span class="badge bg-secondary">OWASP A04 - Security Misconfiguration / CWE-209</span></td>
+            <td><span class="badge bg-success">PASSED</span></td>
+            <td>No se exponen stack traces, detalles de PostgreSQL ni clases internas en respuestas de error.</td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+{
+  "id": "colegio-bo-e2e-suite",
+  "version": "2.0",
+  "name": "Colegio BO - Pruebas E2E y Seguridad",
+  "url": "http://localhost:5173",
+  "tests": [
+    {
+      "id": "tc-01-weak-password",
+      "name": "TC_E2E_01_Validacion_Password_Debil",
+      "commands": [
+        {
+          "command": "open",
+          "target": "/signup",
+          "value": ""
+        },
+        {
+          "command": "setWindowSize",
+          "target": "1280x800",
+          "value": ""
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='email']",
+          "value": "usuario_test@bernardo.cl"
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='password']",
+          "value": "12345"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": ""
+        },
+        {
+          "command": "assertElementPresent",
+          "target": "css=.alert-danger",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "tc-02-registro-exitoso",
+      "name": "TC_E2E_02_Registro_Exitoso",
+      "commands": [
+        {
+          "command": "open",
+          "target": "/signup",
+          "value": ""
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='email']",
+          "value": "alumno_valido@bernardo.cl"
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='password']",
+          "value": "ColegioSeguro2026#"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": ""
+        },
+        {
+          "command": "pause",
+          "target": "1000",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "tc-03-login-dashboard",
+      "name": "TC_E2E_03_Login_Autenticado",
+      "commands": [
+        {
+          "command": "open",
+          "target": "/login",
+          "value": ""
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='email']",
+          "value": "admin@bernardo.cl"
+        },
+        {
+          "command": "type",
+          "target": "css=input[type='password']",
+          "value": "Password123#"
+        },
+        {
+          "command": "click",
+          "target": "css=button[type='submit']",
+          "value": ""
+        },
+        {
+          "command": "pause",
+          "target": "1500",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "tc-04-control-acceso",
+      "name": "TC_E2E_04_Control_Acceso_Sin_Sesion",
+      "commands": [
+        {
+          "command": "open",
+          "target": "/admin",
+          "value": ""
+        },
+        {
+          "command": "pause",
+          "target": "500",
+          "value": ""
+        }
+      ]
+    }
+  ],
+  "suites": [
+    {
+      "id": "suite-principal",
+      "name": "Suite de Validación Integral E2E",
+      "persistSession": false,
+      "parallel": false,
+      "timeout": 300,
+      "tests": [
+        "tc-01-weak-password",
+        "tc-02-registro-exitoso",
+        "tc-03-login-dashboard",
+        "tc-04-control-acceso"
+      ]
+    }
+  ],
+  "urls": [
+    "http://localhost:5173"
+  ],
+  "plugins": []
+}
+
